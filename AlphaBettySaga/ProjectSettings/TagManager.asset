@@ -7,6 +7,8 @@ TagManager:
   - InSceneAlphabets
   - Billboard
   - Show-Word
+  - Score-Word
+  - Letter
   layers:
   - Default
   - TransparentFX

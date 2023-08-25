@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 01fec0bf98607f04ba427008d8635abb
+guid: 8849d59e81839624ba1147ef924d766a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -153,13 +153,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Billboard_0
+      name: Branches_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 71
-        width: 310
-        height: 308
+        x: 43
+        y: 221
+        width: 211
+        height: 130
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,20 +167,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9eab6c672deead44921fcd59150a63e
-      internalID: -668683336
+      spriteID: 039342c563146b346b7b80c56d7495a6
+      internalID: 1442365454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Billboard_1
+      name: Branches_1
       rect:
         serializedVersion: 2
-        x: 330
-        y: 17
-        width: 296
-        height: 362
+        x: 430
+        y: 226
+        width: 216
+        height: 130
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,8 +188,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 189726f3bace58e449a4d0bb12c2b12e
-      internalID: 2095635347
+      spriteID: a760a40d7cb16824abe82ccdd62b75d0
+      internalID: -924825822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Branches_2
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 23
+        width: 219
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 630360f8a97cadd4f83584a953f08281
+      internalID: -1955108310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Branches_3
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 34
+        width: 216
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5b358208b4309f48a52a10947c21579
+      internalID: -981113598
       vertices: []
       indices: 
       edges: []
@@ -205,8 +247,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Billboard_0: -668683336
-      Billboard_1: 2095635347
+      Branches_0: 1442365454
+      Branches_1: -924825822
+      Branches_2: -1955108310
+      Branches_3: -981113598
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

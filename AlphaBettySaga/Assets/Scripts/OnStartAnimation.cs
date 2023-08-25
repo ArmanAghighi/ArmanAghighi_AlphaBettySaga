@@ -9,11 +9,15 @@ public class OnStartAnimation : MonoBehaviour
     [SerializeField] private string _name;
     [SerializeField] private int _value;
     private bool _isCorrectWord = false;
+    private int _wordLength = 0;
     private Text _showText;
+    private Text _scoreText;
     private bool _isSelected = false;
+    private int _score = 0;
     private void Awake()
     {
         _showText = GameObject.FindGameObjectWithTag("Show-Word").GetComponent<Text>();
+        _scoreText = GameObject.FindGameObjectWithTag("Score-Word").GetComponent <Text>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Start()
@@ -58,19 +62,18 @@ public class OnStartAnimation : MonoBehaviour
     private void OnSelectManager()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
         if (hit.collider != null && hit.collider.gameObject == gameObject)
         {
-            _spriteRenderer.color = Color.green;
-            if(!_isSelected)
+            int _selectedIndex = int.Parse(transform.parent.gameObject.name);
+            if (!_isSelected && _wordLength <= 8)
             {
+                Debug.Log(_selectedIndex);
+                _spriteRenderer.color = Color.green;
                 _showText.text += _name;
+                _wordLength = _showText.text.Length;
                 _isSelected = true;
+                _score += _value;
             }
-        }
-        else
-        {
-            _isSelected = false;
         }
     }
     private void OnDeselectManager()
@@ -80,6 +83,11 @@ public class OnStartAnimation : MonoBehaviour
             _spriteRenderer.color = Color.white;
             _isSelected = false;
             _showText.text = "";
+        }
+        else
+        {
+            _score *= 10;
+            _scoreText.text = _score.ToString();
         }
     }
 }
