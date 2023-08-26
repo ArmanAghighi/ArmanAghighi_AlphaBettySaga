@@ -87,6 +87,9 @@ public class OnStartAnimation : MonoBehaviour
         else
         {
             _score *= 10;
+            _score += _showText.text.Length;
+            _isSelected = false;
+            _showText.text = "";
             _scoreText.text = _score.ToString();
         }
     }

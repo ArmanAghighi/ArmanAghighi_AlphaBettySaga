@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShuffleTime : MonoBehaviour
 {
-    private int _shuffleTime = 20;
+    private int _shuffleTime = 45;
     private bool _startShuffling = false;
     private bool _animationIsStarted = false;
     private Animator _animator;
