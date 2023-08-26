@@ -9,6 +9,9 @@ TagManager:
   - Show-Word
   - Score-Word
   - Letter
+  - Frog
+  - Monkey
+  - Bird
   layers:
   - Default
   - TransparentFX
