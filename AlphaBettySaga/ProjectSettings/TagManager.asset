@@ -12,6 +12,7 @@ TagManager:
   - Frog
   - Monkey
   - Bird
+  - SettingCanvas
   layers:
   - Default
   - TransparentFX
