@@ -8,11 +8,14 @@ TagManager:
   - Billboard
   - Show-Word
   - Score-Word
-  - Letter
   - Frog
   - Monkey
   - Bird
   - SettingCanvas
+  - Panel
+  - isSelected
+  - Letter
+  - RemainMoveText
   layers:
   - Default
   - TransparentFX
