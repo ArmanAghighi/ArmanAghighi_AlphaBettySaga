@@ -16,7 +16,8 @@ public class OnStartAnimation : MonoBehaviour
     private Text _remainMoveText;
     private int _remainMove = 8;
     private bool _isSelected = false;
-    private int _score = 0;
+    private static int _score = 0;
+    private static int _allValue = 0;
     private void Awake()
     {
         _showText = GameObject.FindGameObjectWithTag("Show-Word").GetComponent<Text>();
@@ -36,17 +37,6 @@ public class OnStartAnimation : MonoBehaviour
         {
             StartCoroutine(Animation());
             _isStarted = true;
-        }
-    }
-    private bool IsSelectable(int _parentName)
-    {
-        if ((transform.parent.gameObject.name == (_parentName + 1).ToString()) || (transform.parent.gameObject.name == (_parentName - 1).ToString()))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
     private IEnumerator Animation()
@@ -70,7 +60,7 @@ public class OnStartAnimation : MonoBehaviour
         {
                 OnSelectManager();
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && _showText.text.Length >= 3)
         {
             if(_showText.text != "")
             {
@@ -81,6 +71,11 @@ public class OnStartAnimation : MonoBehaviour
             }
             OnDeselectManager();
         }
+        if (Input.GetMouseButtonUp(0) && _showText.text.Length < 3)
+        {
+            _isCorrectWord = false;
+            OnDeselectManager();
+        }
     }
     private void OnSelectManager()
     {
@@ -89,17 +84,39 @@ public class OnStartAnimation : MonoBehaviour
         {
             if (!_isSelected)
             {
-                PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("_Score") + _value);
                 _spriteRenderer.color = Color.green;
                 _showText.text += _name;
                 _isSelected = true;
                 gameObject.tag = "isSelected";
+                if (_name != "")
+                {
+                    _allValue += _value;
+                }
             }
         }
         else
         {
             _isCorrectWord = false;
         }
+    }
+  private void OnDeselectManager()
+    {
+        if (!_isCorrectWord)
+        {
+            _allValue = 0;
+            gameObject.tag = "Untagged";
+            _spriteRenderer.color = Color.white;
+        }
+        else
+        {
+            _score += _allValue * _showText.text.Length * 10;
+            _scoreText.text = _score.ToString();
+            Debug.Log(_score);
+            _remainMove--;
+            _remainMoveText.text = _remainMove.ToString();
+        }
+        _isSelected = false;
+        _showText.text = "";
     }
     private bool CheckCorrectWord(string _newName)
     {
@@ -113,7 +130,7 @@ public class OnStartAnimation : MonoBehaviour
                 // Check if the line length matches the _newName word length
                 if (line.Length == _newName.Length && line.ToLower().Trim().Contains(_newName.ToLower().Trim()))
                 {
-                    //Debug.Log("Word Found");
+                    Debug.Log("Word Found");
                     reader.Close();
                     return true;
                 }
@@ -127,22 +144,5 @@ public class OnStartAnimation : MonoBehaviour
             return false;
         }
     }
-    private void OnDeselectManager()
-    {
-        if (!_isCorrectWord)
-        {
-            gameObject.tag = "Untagged";
-            _spriteRenderer.color = Color.white;
-            _isSelected = false;
-            _showText.text = "";
-        }
-        else
-        {
-            _remainMove--;
-            _remainMoveText.text = _remainMove.ToString();
 
-            _isSelected = false;
-            _showText.text = "";
-        }
-    }
 }

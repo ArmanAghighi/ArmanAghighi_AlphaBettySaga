@@ -26,7 +26,6 @@ public class ShuffleTime : MonoBehaviour
     {
         _startShuffling = true;
     }
-   
     IEnumerator ShuffleAnimatio()
     {
         _animator.SetTrigger("Start_Shuffle");
