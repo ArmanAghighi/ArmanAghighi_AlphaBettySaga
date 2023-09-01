@@ -16,6 +16,7 @@ TagManager:
   - isSelected
   - Letter
   - RemainMoveText
+  - OnMoveScore
   layers:
   - Default
   - TransparentFX
