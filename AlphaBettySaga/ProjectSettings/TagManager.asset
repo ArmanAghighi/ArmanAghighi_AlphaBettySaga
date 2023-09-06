@@ -17,6 +17,13 @@ TagManager:
   - Letter
   - RemainMoveText
   - OnMoveScore
+  - Gold
+  - Scroll
+  - ScoreToPass
+  - FoundPanel
+  - WoodPanel
+  - isEmpty
+  - GameOverPanel
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7758185782801552154}
   - component: {fileID: 5947258241070275582}
+  - component: {fileID: 7436404158403605687}
   - component: {fileID: -4464203733561805136}
   - component: {fileID: -4255687321928896857}
   m_Layer: 0
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082194328643803251}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 69, y: 110, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -86,6 +87,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7436404158403605687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082194328643803251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18adca71b940c174b9da91071e5c3ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1
 --- !u!114 &-4464203733561805136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +114,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Q
   _value: 10
+  _explostionParticleSystem: {fileID: 4041327448387848984, guid: 8d0361d5c4fe7d846bc6d3286e1f91ab, type: 3}
+  _foundBeforePanel: {fileID: 6371309295849027679, guid: c024e787755c9f44eb877a146d3dfeea, type: 3}
+  _branchPrefab: {fileID: 4093599339291575416, guid: 3feef2c1b6515e74b8d3762e02ded6f1, type: 3}
 --- !u!61 &-4255687321928896857
 BoxCollider2D:
   m_ObjectHideFlags: 0

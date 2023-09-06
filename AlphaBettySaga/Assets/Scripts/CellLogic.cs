@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class CellLogic : MonoBehaviour
-{ 
-    [SerializeField] GameObject[] _panelCells;
+{
+    private Scrollbar _scrollBar;
+    private bool _isAccess = false;
     private bool[] _isFull;
     [SerializeField] GameObject[] _alphabets;
+    [SerializeField] GameObject[] _panelCells;
     [SerializeField] GameObject[] _vowelAlphabets;
+    [SerializeField] int _ScoreToPass;
     GameObject[] _words = new GameObject[25];
+    private Text _scoreToPassText;
     private bool _isSetup = false;
+    private void Awake()
+    {
+        _scoreToPassText = GameObject.FindGameObjectWithTag("ScoreToPass").GetComponent<Text>();
+        _scrollBar = GameObject.FindGameObjectWithTag("Scroll").GetComponent<Scrollbar>();
+        _scoreToPassText.text = "/ " + _ScoreToPass.ToString();
+    }
     private void Update()
     {
         if (!_isSetup)
@@ -40,13 +50,22 @@ public class CellLogic : MonoBehaviour
             }
             _isSetup = true;
         }
+        if (_scrollBar.size >= 0.99)
+        {
+            _isAccess = true;
+        }
+        
     }
     public void NewSetup()
     {
-        for (int i = 0; i < _panelCells.Length; i++)
+        if (_isAccess)
         {
-            Destroy(_words[i]);
+            for (int i = 0; i < _panelCells.Length; i++)
+            {
+                Destroy(_words[i]);
+            }
+            _isSetup = false;
+            _isAccess = false;
         }
-        _isSetup = false;
     }
 }

@@ -84,11 +84,11 @@ AnimationClip:
       - serializedVersion: 3
         time: 1.3333334
         value: {x: -88, y: 2727, z: -14760.002}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
+        inSlope: {x: -2.7964542, y: 0, z: 0}
+        outSlope: {x: -2.7964542, y: 0, z: 0}
         tangentMode: 0
         weightedMode: 0
-        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        inWeight: {x: 0.018006371, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -202,11 +202,11 @@ AnimationClip:
       - serializedVersion: 3
         time: 1.3333334
         value: -88
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
+        inSlope: -2.7964542
+        outSlope: -2.7964542
+        tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.018006371
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
