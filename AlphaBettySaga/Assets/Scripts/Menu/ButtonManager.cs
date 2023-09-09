@@ -17,7 +17,6 @@ public class ButtonManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Escape");
             _stoneRigidBody.gravityScale = 0;
             _stoneAnimator.enabled = true;
             _stoneAnimator.SetTrigger("Exit");
