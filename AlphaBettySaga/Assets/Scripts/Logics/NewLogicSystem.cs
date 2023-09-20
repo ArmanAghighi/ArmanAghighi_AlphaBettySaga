@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using System.IO;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
+using System.Linq;
 public class NewLogicSystem : MonoBehaviour
 {
-    private bool _gameOver = false;
+    //===================================
+    private int _indexValue;
+    private static bool _isGold = false;
+    private bool _isOnPause = false;
+    //===================================
+    public static bool _gameOver = false;
     private string _name;
     private int _value = 0;
     [SerializeField] private GameObject _explostionParticleSystem;
@@ -25,10 +30,10 @@ public class NewLogicSystem : MonoBehaviour
     private Text _scoreText;
     private Text _remainMoveText;
     private Text _onMoveScore;
-    private Text _scoreToPass;
     public static int _remainMove = 8;
     private static int _branchForm;
     private List<string> _words = new List<string>();
+    private List<string> _list = new List<string>();
     private void Awake()
     {
         _foundBeforePanelTransform = GameObject.FindGameObjectWithTag("FoundPanel").GetComponent<Transform>();
@@ -41,41 +46,36 @@ public class NewLogicSystem : MonoBehaviour
         }
         _remainMoveText = GameObject.FindGameObjectWithTag("RemainMoveText").GetComponent<Text>();
         _onMoveScore = GameObject.FindGameObjectWithTag("OnMoveScore").GetComponent<Text>();
-        _scoreToPass = GameObject.FindGameObjectWithTag("ScoreToPass").GetComponent<Text>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
         _spriteRenderer.sortingOrder = 2;
+        _indexValue = gameObject.GetComponent<OnEmptyLetterValueSelection>()._valueIndex;
     }
     private void Update()
     {
-        if (_name == null && _value == 0)
+        _isOnPause = PauseScript._onPause;
+        if (!_isOnPause && !_gameOver)
         {
-            _name = gameObject.transform.GetChild(0).GetComponent<TextMeshPro>().text;
-            _value  = int.Parse(gameObject.transform.GetChild(1).GetComponent<TextMeshPro>().text);
-        }
-
-        if (_remainMove > 0 && !_gameOver)
-        {
-            OnGamePlayManager();
-        }
-
-        /*if (_score > int.Parse(_scoreToPass.text))
-        {
-            //Victory
-        }*/
-
-        if (_remainMove <= 0)
-        {
-            if (int.Parse(_scoreText.text) < int.Parse(_scoreToPass.text))
+            if (_name == null && _value == 0)
             {
-                _gameOver = true;
+                _name = gameObject.transform.GetChild(0).GetComponent<TextMeshPro>().text;
+                _value = int.Parse(gameObject.transform.GetChild(1).GetComponent<TextMeshPro>().text);
+                if (_indexValue == 1)
+                {
+                    _value *= 2;
+                }
             }
-            else
+
+            if (_remainMove > 0)
             {
-                //Victory
+                OnGamePlayManager();
             }
+        }
+        else
+        {
+            OnDeselectManager();
         }
     }
 
@@ -173,24 +173,49 @@ public class NewLogicSystem : MonoBehaviour
                     }
                     _onMoveScore.text = (_allValue * _showText.text.Length * 10).ToString();
                 }
+                if (_indexValue == 2)
+                {
+                    _isGold = true;
+                }
             }
         }
+
     }
     private void OnDeselectManager()
     {
         if (!_isCorrectWord)
         {
+            _isGold = false;
             if (gameObject.tag == "isSelected")
                 gameObject.tag = "Letter";
             _lastObject = null;
             _allValue = 0;
-            _spriteRenderer.color = Color.white;
+            if (_indexValue == 0)
+            {
+                _spriteRenderer.color = Color.white;
+            }
+            else if(_indexValue == 1)
+            {
+                _spriteRenderer.color = Color.gray;
+            }
+            else
+            {
+                _spriteRenderer.color = Color.yellow;
+            }
         }
         else
         {
             DestroyObjectsWithTag("isSelected");
-            _score += _allValue * _showText.text.Length * 10;
+            if (_isGold)
+            {
+                _score += _allValue * _showText.text.Length * 10 * 2;
+            }
+            else
+            {
+                _score += _allValue * _showText.text.Length * 10;
+            }
             _scoreText.text = _score.ToString();
+            _isGold = false;
             _remainMove--;
             _remainMoveText.text = _remainMove.ToString();
             _words.Add(_showText.text);
@@ -203,37 +228,30 @@ public class NewLogicSystem : MonoBehaviour
     private bool CheckCorrectWord(string _newName)
     {
         string filePath = "D:/Git/ArmanAghighi_AlphaBettySaga/AlphaBettySaga/Assets/Resources/Resource.txt";
-        if (File.Exists(filePath))
+        if (File.Exists(filePath) && _list.Count == 0)
         {
             StreamReader reader = new StreamReader(filePath);
             string line;
             while ((line = reader.ReadLine()) != null)
             {
-                if (line.Length == _newName.Length && line.ToLower().Trim().Contains(_newName.ToLower().Trim()))
-                {
-                    foreach (var word in _words)
-                    {
-                        if (_showText.text == word)
-                        {
-                            GameObject Panel = Instantiate(_foundBeforePanel, _foundBeforePanelTransform.position, Quaternion.identity);
-                            _foundWord = true;
-                            return false;
-                        }
-                    }
-                    reader.Close();
-                    if (!_foundWord)
-                    {
-                        return true;
-                    }
-                }
+                _list.Add(line.ToLower().Trim());
             }
-            reader.Close();
-            return false;
+        }
+        _newName = _newName.ToLower().Trim();
+        if (!string.IsNullOrEmpty(_list.Where(item => item == _newName).FirstOrDefault()))
+        {
+            if (!string.IsNullOrEmpty(_words.Where(item => item == _newName).FirstOrDefault()))
+            {
+                GameObject Panel = Instantiate(_foundBeforePanel, _foundBeforePanelTransform.position, Quaternion.identity);
+                _foundWord = false;
+            }
+            else
+                _foundWord = true;
         }
         else
-        {
-            return false;
-        }
+            _foundWord = false;
+        return _foundWord;
+
     }
     private void ChangeID(int Form)
     {
@@ -280,3 +298,40 @@ public class NewLogicSystem : MonoBehaviour
         }
     }
 }
+
+/*        
+
+                string filePath = "D:/Git/ArmanAghighi_AlphaBettySaga/AlphaBettySaga/Assets/Resources/Resource.txt";
+        if (File.Exists(filePath))
+        {
+            StreamReader reader = new StreamReader(filePath);
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (line.Length == _newName.Length && line.ToLower().Trim().Contains(_newName.ToLower().Trim()))
+                {
+                    foreach (var word in _words)
+                    {
+                        if (_showText.text == word)
+                        {
+                            GameObject Panel = Instantiate(_foundBeforePanel, _foundBeforePanelTransform.position, Quaternion.identity);
+                            _foundWord = true;
+                            reader.Close();
+                            return false;
+                        }
+                    }
+                    if (!_foundWord)
+                    {
+                        reader.Close();
+                        return true;
+                    }
+                }
+            }
+            reader.Close();
+            return false;
+        }
+        else
+        {
+            return false;
+        }
+ */

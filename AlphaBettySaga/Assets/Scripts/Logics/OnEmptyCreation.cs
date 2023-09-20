@@ -17,12 +17,12 @@ public class OnEmptyCreation : MonoBehaviour
     }
     private void Update()
     {
-
         foreach (GameObject item in _letterPanels)
         {
             if (item.transform.childCount == 0)
             {
                 item.tag = "isEmpty";
+                StartCoroutine(WaitToCreate());
                 Creation(item);
             }
         }
@@ -43,5 +43,9 @@ public class OnEmptyCreation : MonoBehaviour
             _lastEmptyPanel.transform.GetChild(0).SetParent(item.transform);
 
         }
+    }
+    private IEnumerator WaitToCreate()
+    {
+        yield return new WaitForSeconds(8f);
     }
 }

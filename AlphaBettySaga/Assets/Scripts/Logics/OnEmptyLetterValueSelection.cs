@@ -6,6 +6,8 @@ public class OnEmptyLetterValueSelection : MonoBehaviour
 {
     private TextMeshPro _letterMesh;
     private TextMeshPro _valueMesh;
+    public int _valueIndex = 0;
+
     Dictionary<char, int> _letterValues = new Dictionary<char, int>()
 {
     { 'A', 1 },
@@ -45,6 +47,7 @@ public class OnEmptyLetterValueSelection : MonoBehaviour
 };
     private void Awake()
     {
+        _valueIndex = Random.Range(1, 101);
         _letterMesh = gameObject.transform.GetChild(0).GetComponent<TextMeshPro>();
         _valueMesh = gameObject.transform.GetChild(1).GetComponent<TextMeshPro>();
     }
@@ -63,6 +66,20 @@ public class OnEmptyLetterValueSelection : MonoBehaviour
             int randomValue = _vowsLetterValues[randomLetter];
             _letterMesh.text = randomLetter.ToString();
             _valueMesh.text = randomValue.ToString();
+        }
+        if (_valueIndex % 5 == 0)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            _valueIndex = 2;
+        }
+        else if (_valueIndex % 30 == 0)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+            _valueIndex = 1;
+        }
+        else
+        {
+            _valueIndex = 0;
         }
     }
 

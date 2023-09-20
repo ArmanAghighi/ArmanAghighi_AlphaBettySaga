@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8604522973229434857}
   - component: {fileID: 8604522973229434858}
-  - component: {fileID: 5571216476669700682}
   - component: {fileID: 8604522973229434859}
+  - component: {fileID: 5571216476669700682}
   - component: {fileID: 8604522973229434856}
   - component: {fileID: 2994033147688008464}
   m_Layer: 0
@@ -90,6 +90,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8604522973229434859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8604522973229434868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3278bf0dfa9d04d94a61db28efd91d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _valueIndex: 0
 --- !u!114 &5571216476669700682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,18 +118,6 @@ MonoBehaviour:
   _explostionParticleSystem: {fileID: 4041327448387848984, guid: 8d0361d5c4fe7d846bc6d3286e1f91ab, type: 3}
   _foundBeforePanel: {fileID: 6371309295849027679, guid: c024e787755c9f44eb877a146d3dfeea, type: 3}
   _branchPrefab: {fileID: 4093599339291575416, guid: 3feef2c1b6515e74b8d3762e02ded6f1, type: 3}
---- !u!114 &8604522973229434859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8604522973229434868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a3278bf0dfa9d04d94a61db28efd91d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8604522973229434856
 MonoBehaviour:
   m_ObjectHideFlags: 0

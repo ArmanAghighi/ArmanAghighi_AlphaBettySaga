@@ -25,6 +25,8 @@ TagManager:
   - isEmpty
   - GameOverPanel
   - Branch
+  - MainPanel
+  - Center
   layers:
   - Default
   - TransparentFX
