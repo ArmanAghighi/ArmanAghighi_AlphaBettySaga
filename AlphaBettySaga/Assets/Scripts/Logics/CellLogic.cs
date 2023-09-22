@@ -4,39 +4,36 @@ using UnityEngine;
 using UnityEngine.UI;
 public class CellLogic : MonoBehaviour
 {
-    private Scrollbar _scrollBar;
-    private bool _isAccess = false;
-    private bool[] _isFull;
-    [SerializeField] GameObject[] _panelCells;
+    GameObject[] _panelCells;
     [SerializeField] GameObject _emptyLetter;
-    public int _ScoreToPass;
-    GameObject[] _words = new GameObject[25];
+    GameObject[] _words;
     private Text _scoreToPassText;
+    private Text _remainMove;
     private bool _isSetup = false;
-    //start sizecheck
     public int screenWidth = 1360;
     public int screenHeight = 1640;
-    public bool isFullscreen = false;
-
+    private bool[] _isFull;
     private void Start()
     {
         SetScreenResolution();
     }
-
     private void SetScreenResolution()
     {
-        Screen.SetResolution(screenWidth, screenHeight, isFullscreen);
+        Screen.SetResolution(screenWidth, screenHeight, false);
     }
-    //end sizecheck
     private void Awake()
     {
         _scoreToPassText = GameObject.FindGameObjectWithTag("ScoreToPass").GetComponent<Text>();
-        _scrollBar = GameObject.FindGameObjectWithTag("Scroll").GetComponent<Scrollbar>();
-        _scoreToPassText.text =_ScoreToPass.ToString();
+        _remainMove = GameObject.FindGameObjectWithTag("RemainMoveText").GetComponent<Text>();
+        LevelManager _levelManager = GameObject.FindGameObjectWithTag("PanelCreator").GetComponent<LevelManager>();
+        _scoreToPassText.text = _levelManager._score.ToString();
+        _remainMove.text = _levelManager._move.ToString();
+        _panelCells = GameObject.FindGameObjectsWithTag("WoodPanel");
+        _words = new GameObject[_levelManager.gridCreator.gridSize];
     }
     private void Update()
     {
-        if (!_isSetup)
+/*        if (!_isSetup)
         {
             _isFull = new bool[_panelCells.Length];
             for (int i = 0; i < _panelCells.Length; i++)
@@ -56,22 +53,6 @@ public class CellLogic : MonoBehaviour
             }
             _isSetup = true;
         }
-        if (_scrollBar.size >= 0.99)
-        {
-            _isAccess = true;
-        }
-        
-    }
-    public void NewSetup()
-    {
-        if (_isAccess)
-        {
-            for (int i = 0; i < _panelCells.Length; i++)
-            {
-                Destroy(_words[i]);
-            }
-            _isSetup = false;
-            _isAccess = false;
-        }
+*/
     }
 }

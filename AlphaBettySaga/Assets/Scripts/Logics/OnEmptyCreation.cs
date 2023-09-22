@@ -19,17 +19,17 @@ public class OnEmptyCreation : MonoBehaviour
     {
         foreach (GameObject item in _letterPanels)
         {
+            StartCoroutine(WaitToCreate());
             if (item.transform.childCount == 0)
             {
                 item.tag = "isEmpty";
-                StartCoroutine(WaitToCreate());
                 Creation(item);
             }
         }
     }
     private void Creation(GameObject item)
     {
-        if (int.Parse(item.transform.name) <= 5)
+/*        if (int.Parse(item.transform.name) <= 5)
         {
             GameObject _newPanel = Instantiate(_panel, item.transform.position, Quaternion.identity);
             Vector3 _targetScale = new Vector3(1.4f, 1.6f, 1f);
@@ -42,7 +42,7 @@ public class OnEmptyCreation : MonoBehaviour
             GameObject _lastEmptyPanel = gameObject.transform.GetChild(int.Parse(item.transform.name) - 6).gameObject;
             _lastEmptyPanel.transform.GetChild(0).SetParent(item.transform);
 
-        }
+        }*/
     }
     private IEnumerator WaitToCreate()
     {

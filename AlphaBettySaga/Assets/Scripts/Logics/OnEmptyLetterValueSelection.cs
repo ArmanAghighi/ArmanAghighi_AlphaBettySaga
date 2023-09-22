@@ -67,12 +67,12 @@ public class OnEmptyLetterValueSelection : MonoBehaviour
             _letterMesh.text = randomLetter.ToString();
             _valueMesh.text = randomValue.ToString();
         }
-        if (_valueIndex % 5 == 0)
+        if (_valueIndex % 50 == 0)
         {
             gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
             _valueIndex = 2;
         }
-        else if (_valueIndex % 30 == 0)
+        else if (_valueIndex % 20 == 0)
         {
             gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
             _valueIndex = 1;

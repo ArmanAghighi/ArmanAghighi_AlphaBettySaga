@@ -1,15 +1,15 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(GridCreator))] 
+[CustomEditor(typeof(GridCreator))]
 public class LevelDesigner : Editor
 {
     private const float boxSize = 25f;
     private const float boxSpacing = 10f;
-    private bool _isSelected = false;
+    private bool isSelected = false;
     private string GetPlayerPrefsKey(int row, int col, GridCreator gridCreator)
     {
-        return $"BoxSelection_{gridCreator.GetInstanceID()}_{row}_{col}";
+        return $"BoxSelection{gridCreator.GetInstanceID()}{row}{col}";
     }
 
     public override void OnInspectorGUI()
@@ -29,8 +29,10 @@ public class LevelDesigner : Editor
         GUILayout.Label("Grid Preview", EditorStyles.boldLabel);
         if (gridCreator.gridSize >= 10)
             gridCreator.gridSize = 10;
-        if(gridCreator.gridSize <= 4)
+        if (gridCreator.gridSize <= 4)
             gridCreator.gridSize = 4;
+
+        EditorGUI.BeginChangeCheck();
 
         for (int row = 0; row < gridCreator.gridSize; row++)
         {
@@ -60,5 +62,24 @@ public class LevelDesigner : Editor
             GUILayout.EndHorizontal();
             GUILayout.Space(boxSpacing);
         }
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            EditorUtility.SetDirty(gridCreator);
+        }
+
+        GUILayout.Space(20);
+
+        GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Save" , GUILayout.Width(100), GUILayout.Height(20)))
+            {
+                EditorUtility.SetDirty(target);
+            }
+            GUILayout.Space(10);
+            if (GUILayout.Button("Clear Data" , GUILayout.Width(100), GUILayout.Height(20)))
+            {
+                PlayerPrefs.DeleteAll();
+            }
+        GUILayout.EndHorizontal();
     }
 }

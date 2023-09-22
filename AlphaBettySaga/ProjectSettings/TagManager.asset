@@ -27,6 +27,7 @@ TagManager:
   - Branch
   - MainPanel
   - Center
+  - PanelCreator
   layers:
   - Default
   - TransparentFX
